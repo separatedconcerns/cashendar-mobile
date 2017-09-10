@@ -1,16 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Config from './config.json';
-
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Where's My Money?</Text>
-      </View>
-    );
-  }
-}
+// import Config from './config.json';
 
 const styles = StyleSheet.create({
   container: {
@@ -20,3 +10,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      user: null,
+    };
+  }
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text>{'Where\'s My Money?'}</Text>
+      </View>
+    );
+  }
+}
