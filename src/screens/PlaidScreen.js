@@ -1,6 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, AppRegistry } from 'react-native';
-import { StackNavigator} from 'react-navigation';
+import { StyleSheet, View, Button } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -29,6 +28,6 @@ export default class PlaidScreen extends React.Component {
     );
   }
   _handlePress = () => {
-    this.props.navigation.navigate('Home');
+    this.props.navigation.navigate('Dashboard');
   }
 }

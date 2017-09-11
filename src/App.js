@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, AppRegistry } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import { StackNavigator} from 'react-navigation';
 import PlaidScreen from './screens/PlaidScreen.js';
+import DashboardScreen from './screens/DashboardScreen.js'
 // import Config from './config.json';
 
 const styles = StyleSheet.create({
@@ -42,5 +43,8 @@ export default StackNavigator({
   },
   Plaid: {
     screen: PlaidScreen,
+  },
+  Dashboard: {
+    screen: DashboardScreen,
   }
 }, App);
