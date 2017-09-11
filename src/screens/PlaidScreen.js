@@ -1,8 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, AppRegistry } from 'react-native';
 import { StackNavigator} from 'react-navigation';
-import PlaidScreen from './screens/PlaidScreen.js';
-// import Config from './config.json';
 
 const styles = StyleSheet.create({
   container: {
@@ -13,9 +11,9 @@ const styles = StyleSheet.create({
   },
 });
 
-export class App extends React.Component {
+export default class PlaidScreen extends React.Component {
   static navigationOptions = {
-    title: 'Welcome',
+    title: 'Link Account',
   };
   constructor() {
     super();
@@ -26,21 +24,11 @@ export class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>{'Where\'s My Money?'}</Text>
-        <Button title={'Sign in with Google'} onPress={this._handlePress} />
+        <Button title={'Link Your Bank Account'} onPress={this._handlePress} />
       </View>
     );
   }
   _handlePress = () => {
-    this.props.navigation.navigate('Plaid');
+    this.props.navigation.navigate('Home');
   }
 }
-
-export default StackNavigator({
-  Home: {
-    screen: App,
-  },
-  Plaid: {
-    screen: PlaidScreen,
-  }
-}, App);
