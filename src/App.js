@@ -5,8 +5,6 @@ import PlaidScreen from './screens/PlaidScreen.js';
 import DashboardScreen from './screens/DashboardScreen.js';
 import SignInScreen from './screens/SignInScreen.js';
 
-// import Config from './config.json';
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -49,9 +47,9 @@ export class App extends React.Component {
 }
 
 export default StackNavigator({
-  App: {
-    screen: App
-  },
+  // App: {
+  //   screen: App
+  // },
   SignIn: {
     screen: SignInScreen,
   },
