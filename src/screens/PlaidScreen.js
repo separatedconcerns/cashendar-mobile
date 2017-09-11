@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Button } from 'react-native';
+import Config from '../../config.json';
 
 const styles = StyleSheet.create({
   container: {
@@ -23,11 +24,12 @@ export default class PlaidScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Button title={'Link Your Bank Account'} onPress={this._handlePress} />
+        <Button title={'Link Your Bank Account'} onPress={this._navigateToDashboard} />
       </View>
     );
   }
-  _handlePress = () => {
+
+  _navigateToDashboard = () => {
     this.props.navigation.navigate('Dashboard');
   }
 }
