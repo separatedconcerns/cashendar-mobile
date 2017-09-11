@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Button } from 'react-native';
 import Config from '../../config.json';
+import PlaidAuthenticator from 'react-native-plaid-link';
 
 const styles = StyleSheet.create({
   container: {
@@ -18,15 +19,49 @@ export default class PlaidScreen extends React.Component {
   constructor() {
     super();
     this.state = {
-      user: null,
+      linkButtonPressed: false
     };
+    this.onMessage = this.onMessage.bind(this);
   }
+
   render() {
     return (
-      <View style={styles.container}>
-        <Button title={'Link Your Bank Account'} onPress={this._navigateToDashboard} />
-      </View>
+      this.state.linkButtonPressed ? this.renderPlaidLink() : this.renderLinkButton()
     );
+  }
+
+  renderLinkButton() {
+    return (
+      <View style={styles.container}>
+        <Button title={'Link Your Bank Account'} onPress={ () => this.setState({linkButtonPressed: true})} />
+      </View>
+    )
+  }
+
+  renderPlaidLink() {
+    return (
+      <PlaidAuthenticator
+        onMessage={this.onMessage}
+        publicKey = {Config.REACT_APP_PLAID_PUBLIC_KEY}
+        env='sandbox'
+        product='auth,transactions'
+        clientName='Wheres My Money'
+     />
+    )
+  }
+
+  onMessage(data) {
+    if (data.action === 'plaid_link-undefined::connected') {
+      console.log(data);
+      this.setState(
+        {linkButtonPressed: false},
+        () => this.exchangePublicToken(data.metadata.public_token)
+      )
+    }
+  }
+
+  exchangePublicToken(public_token) {
+    console.log(public_token);
   }
 
   _navigateToDashboard = () => {
