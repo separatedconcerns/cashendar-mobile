@@ -1,13 +1,20 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import { StackNavigator} from 'react-navigation';
-import { auth, provider } from '../../firebase.js';
 import { Google } from 'expo';
-import Config from '../../config.json';
 import firebase from 'firebase';
-import qs from 'qs';
 import axios from 'axios';
-// import Config from './config.json';
+import qs from 'qs';
+import { auth } from '../../firebase';
+import Config from '../../config.json';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
 
 export default class App extends React.Component {
   static navigationOptions = {
@@ -18,51 +25,44 @@ export default class App extends React.Component {
     this.state = {
       user: null,
     };
-    this._login = this._login.bind(this);
+    this.login = this.login.bind(this);
   }
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>{'Where\'s My Money?'}</Text>
-        <Button title={'Sign in with Google'} onPress={this._login} />
-      </View>
-    );
-  }
-  _login = () => {
+
+  login = () => {
     Google.logInAsync({
-      iosClientId: Config.REACT_APP_IOS_CLIENT_ID
+      iosClientId: Config.REACT_APP_IOS_CLIENT_ID,
     })
-      .then( result => {
+      .then((result) => {
         if (result.type === 'success') {
           const credential = firebase.auth.GoogleAuthProvider.credential(result.idToken);
           firebase.auth().signInWithCredential(credential);
         }
       })
-      .then( () => {
+      .then(() => {
         auth.currentUser.getIdToken()
-          .then( idToken => {
+          .then((idToken) => {
             const config = {
               url: 'http://localhost:5000/testproject-6177f/us-central1/addUser',
-              payload: qs.stringify({idToken: idToken})
+              payload: qs.stringify({ idToken }),
             };
-            axios.post(config.url, config.payload)
-          })
+            axios.post(config.url, config.payload);
+          });
       })
-      .then( () => this._navigateToPlaid())
-      .catch( error => console.log(error));
+      .then(() => this.navigateToPlaid())
+      .catch(error => console.log(error));
   }
 
-  _navigateToPlaid = () => {
+  navigateToPlaid = () => {
     this.props.navigation.navigate('Plaid');
   }
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text>{'Where\'s My Money?'}</Text>
+        <Button title={'Sign in with Google'} onPress={this.login} />
+      </View>
+    );
+  }
+}
 
