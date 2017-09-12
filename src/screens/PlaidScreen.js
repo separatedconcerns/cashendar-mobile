@@ -2,6 +2,9 @@ import React from 'react';
 import { StyleSheet, View, Button } from 'react-native';
 import Config from '../../config.json';
 import PlaidAuthenticator from 'react-native-plaid-link';
+import qs from 'qs';
+import axios from 'axios';
+import { auth, provider } from '../../firebase.js';
 
 const styles = StyleSheet.create({
   container: {
@@ -13,6 +16,7 @@ const styles = StyleSheet.create({
 });
 
 export default class PlaidScreen extends React.Component {
+  // eslint-disable-next-line
   static navigationOptions = {
     title: 'Link Account',
   };
@@ -22,6 +26,7 @@ export default class PlaidScreen extends React.Component {
       linkButtonPressed: false
     };
     this.onMessage = this.onMessage.bind(this);
+    this.exchangePublicToken = this.exchangePublicToken.bind(this);
   }
 
   render() {
@@ -61,7 +66,17 @@ export default class PlaidScreen extends React.Component {
   }
 
   exchangePublicToken(public_token) {
-    console.log(public_token);
+    console.log('public token: ', public_token)
+    let config = {
+      url: 'http://localhost:5000/testproject-6177f/us-central1/exchangePublicToken',
+      payload: qs.stringify({
+        publicToken: public_token,
+        uniqueUserId: auth.currentUser.uid
+      })
+    };
+    axios.post(config.url, config.payload)
+    .then(() => this._navigateToDashboard())
+    .catch(error => { console.log(error);});
   }
 
   _navigateToDashboard = () => {
