@@ -1,9 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
-import { StackNavigator} from 'react-navigation';
-import PlaidScreen from './screens/PlaidScreen.js';
-import DashboardScreen from './screens/DashboardScreen.js';
-import SignInScreen from './screens/SignInScreen.js';
+import { StyleSheet, View } from 'react-native';
+import { StackNavigator } from 'react-navigation';
+import PlaidScreen from './screens/PlaidScreen';
+import DashboardScreen from './screens/DashboardScreen';
+import SignInScreen from './screens/SignInScreen';
 
 const styles = StyleSheet.create({
   container: {
@@ -26,15 +26,7 @@ export class App extends React.Component {
   }
 
   componentWillMount() {
-    this.state.loggedIn ? this.navigateToDashboard() : this.navigateToSignIn();    
-  }
-
-  render() {
-    return (
-      <View style={styles.container}>
-        {/* TODO: Display a loading icon/splash screen */}
-      </View>
-    );
+    this.state.loggedIn ? this.navigateToDashboard() : this.navigateToSignIn();
   }
 
   navigateToDashboard = () => {
@@ -44,12 +36,20 @@ export class App extends React.Component {
   navigateToSignIn = () => {
     this.props.navigation.navigate('SignIn');
   }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        {/* TODO: Display a loading icon/splash screen */}
+      </View>
+    );
+  }
 }
 
 export default StackNavigator({
-  // App: {
-  //   screen: App
-  // },
+  App: {
+    screen: App,
+  },
   SignIn: {
     screen: SignInScreen,
   },
@@ -58,5 +58,5 @@ export default StackNavigator({
   },
   Dashboard: {
     screen: DashboardScreen,
-  }
+  },
 }, App);
