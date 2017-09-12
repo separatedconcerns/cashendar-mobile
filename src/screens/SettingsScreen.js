@@ -1,5 +1,4 @@
 import React from 'react';
-import { TabNavigator } from 'react-navigation';
 import { StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({

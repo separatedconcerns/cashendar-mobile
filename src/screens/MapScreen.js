@@ -1,5 +1,4 @@
 import React from 'react';
-import { TabNavigator } from 'react-navigation';
 import { StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -13,7 +12,7 @@ const styles = StyleSheet.create({
 
 export default class MapScreen extends React.Component {
   // static navigationOptions = {
-  //   title: 'Dashboard',
+  //   title: 'Map',
   // };
   constructor() {
     super();
