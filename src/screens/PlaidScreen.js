@@ -48,12 +48,12 @@ export default class PlaidScreen extends React.Component {
       }),
     };
     axios.post(config.url, config.payload)
-    .then(() => this.navigateToDashboard())
+    .then(() => this.navigateToHome())
     .catch((error) => { console.log(error); });
   }
 
-  navigateToDashboard = () => {
-    this.props.navigation.navigate('Dashboard');
+  navigateToHome = () => {
+    this.props.navigation.navigate('Home');
   }
 
   renderLinkButton() {
