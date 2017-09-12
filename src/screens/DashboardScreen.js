@@ -1,5 +1,9 @@
 import React from 'react';
+import { TabNavigator } from 'react-navigation';
 import { StyleSheet, Text, View } from 'react-native';
+import MapScreen from './MapScreen';
+import SettingsScreen from './SettingsScreen';
+
 
 const styles = StyleSheet.create({
   container: {
@@ -10,21 +14,26 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class DashboardScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Dashboard',
-  };
-  constructor() {
-    super();
-    this.state = {
-      user: null,
-    };
-  }
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Your Daily Spending</Text>
-      </View>
-    );
-  }
-}
+// class DashboardScreen extends React.Component {
+//   static navigationOptions = {
+//     title: 'Dashboard',
+//   };
+//   constructor() {
+//     super();
+//     this.state = {
+//       user: null,
+//     };
+//   }
+//   render() {
+//     return (
+//       <View style={styles.container}>
+//         <Text>Your Daily Spending</Text>
+//       </View>
+//     );
+//   }
+// }
+
+export default TabNavigator({
+  Map: { screen: MapScreen },
+  Settings: { screen: SettingsScreen },
+});
