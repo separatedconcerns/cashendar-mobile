@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import PlaidScreen from './screens/PlaidScreen';
-import DashboardScreen from './screens/DashboardScreen';
+import HomeScreen from './screens/HomeScreen';
 import SignInScreen from './screens/SignInScreen';
 
 const styles = StyleSheet.create({
@@ -30,7 +30,7 @@ export class App extends React.Component {
   }
 
   navigateToDashboard = () => {
-    this.props.navigation.navigate('Dashboard');
+    this.props.navigation.navigate('Home');
   }
 
   navigateToSignIn = () => {
@@ -56,7 +56,7 @@ export default StackNavigator({
   Plaid: {
     screen: PlaidScreen,
   },
-  Dashboard: {
-    screen: DashboardScreen,
+  Home: {
+    screen: HomeScreen,
   },
 }, App);
