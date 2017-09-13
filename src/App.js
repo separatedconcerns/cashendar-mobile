@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
 });
 
 export class App extends React.Component {
+  // set options for stack navigation
   static navigationOptions = {
     title: 'Welcome',
   };
@@ -46,6 +47,9 @@ export class App extends React.Component {
   }
 }
 
+// set up navigation
+// by default, the first Screen will load when App.js loads
+// in this case, it is app
 export default StackNavigator({
   App: {
     screen: App,
@@ -60,3 +64,5 @@ export default StackNavigator({
     screen: HomeScreen,
   },
 }, App);
+
+// the 2nd parameter App on above is to export this component

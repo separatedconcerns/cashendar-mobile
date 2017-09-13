@@ -32,7 +32,8 @@ export default class DashboardScreen extends React.Component {
       payload: qs.stringify({ uniqueUserId: this.state.user }),
     };
     axios.post(config.url, config.payload)
-      .then((response) => {
+      .then((response) => { // eslint-disable-line
+        // response.data[Object.keys(response.data)[0]]
         this.setState({ dailySpending: response.data[Object.keys(response.data)[0]] });
       })
       .catch(console.error);
